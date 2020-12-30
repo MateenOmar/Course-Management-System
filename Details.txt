@@ -1,0 +1,31 @@
+Student:
+Check grades
+Get assignments
+hand in assignments
+do quizzes
+
+
+Instructor:
+Add grades for students
+add quizzes
+add assignments
+manage quizzes and assignments
+make announcements
+
+
+Course:
+holds quizzes/assignments/grades/students/announcements
+
+
+Administrator:
+add students to courses
+add instructors to courses
+add courses
+
+
+School:
+Manages log in
+
+Admin, Student, Instructor can log in.
+Student can be an instructor, but an instructor can't be a student.
+Each kind of log in has specific permissions
