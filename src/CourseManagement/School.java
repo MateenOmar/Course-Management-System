@@ -10,10 +10,14 @@ public class School {
   private ArrayList<Course> offeredCourses;
   private School school = null;
   private String schoolName;
+  private int numForStudents; 
+  private int numForInstructors; 
   
   
   private School(String schoolName) {
     this.schoolName = schoolName;
+    numForStudents = 314;
+    numForStudents = 111;
     students = new ArrayList<Student>();
     instructors = new ArrayList<Instructor>();
     admins = new ArrayList<Administrator>();
@@ -22,27 +26,43 @@ public class School {
   
   public School createInstanceOfSchool(String schoolName) {
     
-    if(school == null) {
-      school = new School(schoolName);
+    if(this.school == null) {
+      this.school = new School(schoolName);
     }
     
-    return school;
+    return this.school;
   }
   
-  public void addStudent(String name) {
-    students.add(new Student(name));
+  public void addStudent(String firstName, String lastName) {
+    this.students.add(new Student(firstName, lastName, numForStudents));
   }
   
-  public void addInstructor(String name) {
-    instructors.add(new Instructor(name));
+  public void addInstructor(String firstName, String lastName) {
+    this.instructors.add(new Instructor(firstName, lastName, numForInstructors));
   }
   
   public void addAdministrator(String name) {
-    admins.add(new Administrator(name));
+    this.admins.add(new Administrator(name));
   }
 
   public String getSchoolName() {
-    return schoolName;
+    return this.schoolName;
+  }
+
+  public ArrayList<Student> getStudents() {
+    return this.students;
+  }
+  
+  public ArrayList<Instructor> getInstructors() {
+    return this.instructors;
+  }
+
+  public ArrayList<Administrator> getAdmins() {
+    return this.admins;
+  }
+
+  public ArrayList<Course> getOfferedCourses() {
+    return this.offeredCourses;
   }
 
 }
