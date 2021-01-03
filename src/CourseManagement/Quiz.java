@@ -1,13 +1,15 @@
 package CourseManagement;
 
-public class Assignment {
-
+public class Quiz {
+  
   private String title;
   private String note;
+  private int timeLimit;
   
-  public Assignment(String title, String note) {
+  public Quiz(String title, String note, int timeLimit) {
     this.title = title;
     this.note = note;
+    this.timeLimit = timeLimit;
   }
   
   public void changeTitle(String title) {
@@ -16,6 +18,10 @@ public class Assignment {
   
   public void changeNote(String note) {
     this.note = note;
+  }
+  
+  public void changeTimeLimit(int timeLimit) {
+    this.timeLimit = timeLimit;
   }
   
   public String getTitle() {
@@ -33,5 +39,4 @@ public class Assignment {
   public void printNote() {
     System.out.println(this.note);
   }
-  
 }
