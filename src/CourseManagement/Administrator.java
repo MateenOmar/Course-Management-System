@@ -100,6 +100,154 @@ public class Administrator {
 
     return false;
   }
+  
+  //UNSURE
+  public boolean removeStudent(String studentID) {
+    ArrayList<Course> offeredList = school.getOfferedCourses();
+    ArrayList<Student> studentList = school.getStudents();
+    Student student = null;
+    
+    for(int i = 0; i < studentList.size(); i++) {
+      
+      if(studentList.get(i).getStudentID().equals(studentID)) {
+        student = studentList.get(i);
+        break;
+      }
+      
+    }
+    
+    if(student == null) {
+      return false;
+    } 
+    
+    for(int i = 0; i < student.getEnrolledCourses().size(); i++) {
+      
+//      ArrayList<Student> courseStudentList = offeredList.get(student.getEnrolledCourses().get(i)).getStudents();
+//      courseStudentList.remove(student);
+//      offeredList.get(student.getEnrolledCourses().get(i)).setStudents(courseStudentList);
+      
+//      for(int j = 0; j < offeredList.size(); j++) {
+//        if(student.getEnrolledCourses().get(i).getCourseName() == offeredList.get(j).getCourseName()) {
+//          ArrayList<Student> courseStudentList = offeredList.get(j).getStudents();
+//          courseStudentList.remove(student);
+//        }
+//      }
+      
+    }
+    
+    studentList.remove(student);
+    school.setStudents(studentList);
+    
+    return true;
+  }
+  
+  //UNSURE
+  public boolean removeInstructor(String instructorID) {
+    ArrayList<Course> offeredList = school.getOfferedCourses();
+    ArrayList<Instructor> instructorList = school.getInstructors();
+    Instructor instructor = null;
+    
+    for(int i = 0; i < instructorList.size(); i++) {
+      
+      if(instructorList.get(i).getInstructorID().equals(instructorID)) {
+        instructor = instructorList.get(i);
+        break;
+      }
+      
+    }
+    
+    if(instructor == null) {
+      return false;
+    }
+    
+    for(int i = 0; i < instructor.getInstructorForCourses().size(); i++) {
+//      ArrayList<Instructor> courseInstructorList = offeredList.get(instructor.getInstructorForCourses().get(i)).getInstructors();
+//      courseInstructorList.remove(instructor);
+//      offeredList.get(instructor.getInstructorForCourses().get(i)).setInstructors(courseInstructorList);
+    }
+    
+    instructorList.remove(instructor);
+    school.setInstructors(instructorList);
+    
+    return true;
+  }
+  
+  //UNSURE
+  public boolean removeStudentFromCourse(String studentID, String courseName) {
+    ArrayList<Course> offeredList = school.getOfferedCourses();
+    ArrayList<Student> studentList = school.getStudents();
+    Student student = null;
+    
+    for(int i = 0; i < studentList.size(); i++) {
+      
+      if(studentList.get(i).getStudentID().equals(studentID)) {
+        student = studentList.get(i);
+        break;
+      }
+      
+    }
+    
+    if(student == null) {
+      return false;
+    }
+    
+    for(int i = 0; i < offeredList.size(); i++) {
+      
+      if(offeredList.get(i).getCourseName().equals(courseName)) {
+//        ArrayList<Student> courseStudentList = offeredList.get(i).getStudents();
+//        courseStudentList.remove(student);
+//        offeredList.get(i).setStudents(courseStudentList);
+        
+        ArrayList<Course> studentsCourses = student.getEnrolledCourses();
+        studentsCourses.remove(offeredList.get(i));
+        student.setEnrolledCourses(studentsCourses);
+        
+        return true;
+      }
+      
+    }
+    
+    
+    return false;
+  }
+  
+  //UNSURE
+  public boolean removeInstructorFromCourse(String instructorID, String courseName) {
+    ArrayList<Course> offeredList = school.getOfferedCourses();
+    ArrayList<Instructor> instructorList = school.getInstructors();
+    Instructor instructor = null;
+    
+    for(int i = 0; i < instructorList.size(); i++) {
+      
+      if(instructorList.get(i).getInstructorID().equals(instructorID)) {
+        instructor = instructorList.get(i);
+        break;
+      }
+      
+    }
+    
+    if(instructor == null) {
+      return false;
+    }
+    
+    for(int i = 0; i < offeredList.size(); i++) {
+      
+      if(offeredList.get(i).getCourseName().equals(courseName)) {
+//        ArrayList<Instructor> courseInstructorList = offeredList.get(i).getInstructors();
+//        courseInstructorList.remove(instructor);
+//        offeredList.get(i).setInstructors(courseInstructorList);
+        
+        ArrayList<Course> instructorsCourses = instructor.getInstructorForCourses();
+        instructorsCourses.remove(offeredList.get(i));
+        instructor.setInstructorForCourses(instructorsCourses);
+        
+        return true;
+      }
+      
+    }
+    
+    return false;
+  }
 
   public String getFullName() {
     return this.firstName + " " + this.lastName;
