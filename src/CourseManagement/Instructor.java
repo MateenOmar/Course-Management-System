@@ -24,6 +24,10 @@ public class Instructor {
     return this.firstName + " " + this.lastName;
   } 
   
+  public void setInstructorForCourses(ArrayList<Course> instructorForCourses) {
+    this.instructorForCourses = instructorForCourses;
+  }
+
   public String getInstructorID() {
     return this.instructorID;
   }

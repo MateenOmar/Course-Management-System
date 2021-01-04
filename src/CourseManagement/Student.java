@@ -16,6 +16,10 @@ public class Student {
     this.enrolledCourses = new ArrayList<Course>();
   }
 
+  public void setEnrolledCourses(ArrayList<Course> enrolledCourses) {
+    this.enrolledCourses = enrolledCourses;
+  }
+
   public ArrayList<Course> getEnrolledCourses() {
     return this.enrolledCourses;
   }
