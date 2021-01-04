@@ -26,7 +26,11 @@ public class Course {
   }
   
   public void removeAssignment(String title) {
-    this.assignment.remove(assignment.indexOf(title));
+    for(int i = 0; i < assignment.size(); i++) {
+      if(this.assignment.get(i).getTitle().equals(title)) {
+        assignment.remove(i);
+      }
+    }
   }
   
   public void printAllAssignmentsTitle() {
@@ -34,63 +38,41 @@ public class Course {
       this.assignment.get(i).printTitle();
     }
   }
-  //finds an instructor in the course
-  public boolean findInstructor(int instructorID) {
-    for(int i = 0; i < instructors.size(); i++) {
-      if(this.instructors.get(i).getInstructorID().equals(instructorID)) return true;
-    }
-    return false;
+  
+  public void addQuiz(String title, String note, int timeLimit) {
+    this.quizzes.add(new Quiz(title, note, timeLimit));
   }
-  //adds an instructor to the course
-  public void addInstructor(String firstName, String lastName, int num) {
-    
-    String instructorID = lastName + firstName + num;
-    boolean check = true;
-    for(int i = 0; i < this.instructors.size(); i++) {
-      if(this.instructors.get(i).getInstructorID().equals(instructorID)) {
-        check = false;
-        break;
-      }
-    }
-    if(check) this.students.add(new Student(firstName, lastName, num));
-  }
-  //remove an instructor in the course
-  public void removeInstructor(String instructorID) {
-    for(int i = 0; i < students.size(); i++) {
-      if(instructors.get(i).getInstructorID().equals(instructorID)) {
-        this.instructors.remove(instructors.get(i));
-        break;
+  
+  public void removeQuiz(String title) {
+    for(int i = 0; i < quizzes.size(); i++) {
+      if(this.quizzes.get(i).getTitle().equals(title)) {
+        quizzes.remove(i);
       }
     }
   }
   
-  public boolean findStudent(int studentID) {
-    for(int i = 0; i < students.size(); i++) {
-      if(this.students.get(i).getStudentID().equals(studentID)) return true;
+  public void printAllQuizzesTitle() {
+    for(int i = 0; i < this.quizzes.size(); i++) {
+      this.quizzes.get(i).printTitle();
     }
-    return false;
   }
   
-  public void addStudent(String firstName, String lastName, int num) {
-    String studentID = lastName + firstName + num;
-    boolean check = true;
-    for(int i = 0; i < this.students.size(); i++) {
-      if(this.students.get(i).getStudentID().equals(studentID)) {
-        check = false;
-        break;
-      }
-    }
-    if(check) this.students.add(new Student(firstName, lastName, num));
+  public ArrayList<Student> getStudentList(){
+    return students;
   }
   
-  public void removeStudent(String studentID) {
-    for(int i = 0; i < students.size(); i++) {
-      if(students.get(i).getStudentID().equals(studentID)) {
-        this.students.remove(students.get(i));
-        break;
-      }
-    }
+  public void setStudentList(ArrayList<Student> students) {
+    this.students =  students;
   }
+  
+  public ArrayList<Instructor> getInstructorList(){
+    return instructors;
+  }
+  
+  public void setInstructorList(ArrayList<Instructor> instructors) {
+    this.instructors =  instructors;
+  }
+  
   
   
   
