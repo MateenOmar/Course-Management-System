@@ -8,6 +8,7 @@ public class Course {
   private ArrayList<Quiz> quizzes;
   private ArrayList<Student> students;
   private ArrayList<Instructor> instructors;
+  private ArrayList<String> orderOfAssessments;
   
   public Course(String courseName) {
     assignment = new ArrayList<Assignment>();
@@ -23,6 +24,8 @@ public class Course {
   
   public void addAssignment(String title, String note) {
     this.assignment.add(new Assignment(title, note));
+    storeOrderOfAssessments(title);
+    
   }
   
   public void removeAssignment(String title) {
@@ -41,6 +44,7 @@ public class Course {
   
   public void addQuiz(String title, String note, int timeLimit) {
     this.quizzes.add(new Quiz(title, note, timeLimit));
+    storeOrderOfAssessments(title);
   }
   
   public void removeQuiz(String title) {
@@ -65,6 +69,13 @@ public class Course {
     this.students =  students;
   }
   
+  public Student findStudentByID(String studentID) {
+    for(int i = 0; i < students.size(); i++) {
+      if(students.get(i).getStudentID().equals(studentID)) return students.get(i);
+    }
+    return null;
+  }
+  
   public ArrayList<Instructor> getInstructorList(){
     return instructors;
   }
@@ -73,7 +84,16 @@ public class Course {
     this.instructors =  instructors;
   }
   
+  public void storeOrderOfAssessments(String title) {
+    orderOfAssessments.add(title);
+  }
   
+  public void changeStudentGrade(String studentID, String title, float grade) {
+    Student tempStudent = findStudentByID(studentID);
+    ArrayList<ArrayList<Float>> tempGrades = tempStudent.getGrades();
+    int indexOfCourse = tempStudent.getCourseIndex(courseName);
+    tempGrades.get(indexOfCourse).set(tempGrades.get(indexOfCourse).indexOf(title), grade);
+  }
   
   
 }
