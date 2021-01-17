@@ -8,6 +8,7 @@ public class Instructor {
   private String firstName;
   private String lastName;
   private String instructorID;
+  private String idPassword;
   
   public Instructor(String firstName, String lastName, int num) {
     this.firstName = firstName;
@@ -24,8 +25,16 @@ public class Instructor {
     return this.firstName + " " + this.lastName;
   } 
   
+  public String getIdPassword() {
+    return idPassword;
+  }
+  
   public void setInstructorForCourses(ArrayList<Course> instructorForCourses) {
     this.instructorForCourses = instructorForCourses;
+  }
+  
+  public void setIdPassword(String idPassword) {
+    this.idPassword = idPassword;
   }
 
   public String getInstructorID() {

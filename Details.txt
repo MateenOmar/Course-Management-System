@@ -20,11 +20,11 @@ holds quizzes/assignments/grades/students/announcements
 Administrator:
 add students to courses
 add instructors to courses
-add courses
 
 
 School:
 Manages log in
+Add courses and Admins
 
 Admin, Student, Instructor can log in.
 Student can be an instructor, but an instructor can't be a student.

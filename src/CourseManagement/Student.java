@@ -9,12 +9,14 @@ public class Student {
   private String firstName;
   private String lastName;
   private String studentID;
+  private String idPassword;
   
   public Student(String firstName, String lastName, int num) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.studentID = lastName + firstName + num;
     this.enrolledCourses = new ArrayList<Course>();
+    this.idPassword = this.studentID + firstName;
   }
 
   public void setEnrolledCourses(ArrayList<Course> enrolledCourses) {
@@ -33,6 +35,10 @@ public class Student {
     return this.studentID;
   }
   
+  public String getIdPassword() {
+    return idPassword;
+  }
+  
   public ArrayList<ArrayList<Float>> getGrades(){
     return this.grades;
   }
@@ -41,6 +47,10 @@ public class Student {
     this.grades = grades;
   }
   
+  public void setIdPassword(String idPassword) {
+    this.idPassword = idPassword;
+  }
+
   public int getCourseIndex(String courseName) {
     for(int i = 0; i < enrolledCourses.size(); i++) {
       if(enrolledCourses.get(i).getCourseName().equals(courseName)) {

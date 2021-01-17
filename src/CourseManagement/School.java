@@ -10,6 +10,7 @@ public class School {
   private ArrayList<Course> offeredCourses;
   private static School school = null;
   private String schoolName;
+  private String idPassword;
   
   private School(String schoolName) {
     this.schoolName = schoolName;
@@ -17,6 +18,7 @@ public class School {
     instructors = new ArrayList<Instructor>();
     admins = new ArrayList<Administrator>();
     offeredCourses = new ArrayList<Course>();
+    this.idPassword = schoolName;
   }
   
   public static School createInstanceOfSchool(String schoolName) {
@@ -56,11 +58,19 @@ public class School {
     return this.offeredCourses;
   }
   
+  public String getIdPassword() {
+    return idPassword;
+  }
+  
   public void setStudents(ArrayList<Student> students) {
     this.students = students;
   }
 
   public void setInstructors(ArrayList<Instructor> instructors) {
     this.instructors = instructors;
+  }
+  
+  public void setIdPassword(String idPassword) {
+    this.idPassword = idPassword;
   }
 }

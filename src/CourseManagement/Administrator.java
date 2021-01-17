@@ -10,12 +10,15 @@ public class Administrator {
   private School school;
   private int numForStudents; 
   private int numForInstructors; 
+  private String idPassword;
 
   public Administrator(String firstName, String lastName, School school) {
     this.school = school;
+    this.firstName = firstName;
+    this.lastName = lastName;
     this.adminID = lastName + firstName;
-    numForStudents = 314;
-    numForInstructors = 111;
+    numForStudents = 5555;
+    numForInstructors = 1111;
   }
 
   public void addStudent(String firstName, String lastName) {
@@ -33,7 +36,6 @@ public class Administrator {
     numForInstructors++;
   }
 
-  //UNSURE about this method
   public boolean addStudentToCourse(String studentID, String courseName) {
     ArrayList<Course> offeredList = school.getOfferedCourses();
     ArrayList<Student> studentList = school.getStudents();
@@ -55,10 +57,15 @@ public class Administrator {
     for(int i = 0; i < offeredList.size(); i++) {
       
       if(offeredList.get(i).getCourseName().equals(courseName)) {
-        //offeredList.get(i).addStudent(student);
+        ArrayList<Student> courseStudentList = offeredList.get(i).getStudentList();
+        courseStudentList.add(student);
+        offeredList.get(i).setStudentList(courseStudentList);
+        
+        
         ArrayList<Course> courses = student.getEnrolledCourses();
         courses.add(offeredList.get(i));
         student.setEnrolledCourses(courses);
+        
         return true;
       }
       
@@ -67,7 +74,6 @@ public class Administrator {
     return false;
   }
 
-  //UNSURE about this method
   public boolean addInstructorToCourse(String instructorID, String courseName) {
     ArrayList<Course> offeredList = school.getOfferedCourses();
     ArrayList<Instructor> instructorList = school.getInstructors();
@@ -89,10 +95,14 @@ public class Administrator {
     for(int i = 0; i < offeredList.size(); i++) {
       
       if(offeredList.get(i).getCourseName().equals(courseName)) {
-        //offeredList.get(i).addInstructor(instructor);
+        ArrayList<Instructor> courseInstructorList = offeredList.get(i).getInstructorList();
+        courseInstructorList.add(instructor);
+        offeredList.get(i).setInstructorList(courseInstructorList);
+        
         ArrayList<Course> courses = instructor.getInstructorForCourses();
         courses.add(offeredList.get(i));
         instructor.setInstructorForCourses(courses);
+        
         return true;
       }
       
@@ -101,7 +111,6 @@ public class Administrator {
     return false;
   }
   
-  //UNSURE
   public boolean removeStudent(String studentID) {
     ArrayList<Course> offeredList = school.getOfferedCourses();
     ArrayList<Student> studentList = school.getStudents();
@@ -122,16 +131,19 @@ public class Administrator {
     
     for(int i = 0; i < student.getEnrolledCourses().size(); i++) {
       
-//      ArrayList<Student> courseStudentList = offeredList.get(student.getEnrolledCourses().get(i)).getStudents();
+//      ArrayList<Student> courseStudentList = offeredListget(student.getEnrolledCourses().get(i)).getStudents();
 //      courseStudentList.remove(student);
-//      offeredList.get(student.getEnrolledCourses().get(i)).setStudents(courseStudentList);
+//      offeredList.get(student.getEnrolledCourses().get(i)).setStudentList(courseStudentList);
       
-//      for(int j = 0; j < offeredList.size(); j++) {
-//        if(student.getEnrolledCourses().get(i).getCourseName() == offeredList.get(j).getCourseName()) {
-//          ArrayList<Student> courseStudentList = offeredList.get(j).getStudents();
-//          courseStudentList.remove(student);
-//        }
-//      }
+      for(int j = 0; j < offeredList.size(); j++) {
+        
+        if(student.getEnrolledCourses().get(i).getCourseName() == offeredList.get(j).getCourseName()) {
+          ArrayList<Student> courseStudentList = offeredList.get(j).getStudentList();
+          courseStudentList.remove(student);
+          offeredList.get(j).setStudentList(courseStudentList);
+        }
+        
+      }
       
     }
     
@@ -141,7 +153,6 @@ public class Administrator {
     return true;
   }
   
-  //UNSURE
   public boolean removeInstructor(String instructorID) {
     ArrayList<Course> offeredList = school.getOfferedCourses();
     ArrayList<Instructor> instructorList = school.getInstructors();
@@ -161,9 +172,20 @@ public class Administrator {
     }
     
     for(int i = 0; i < instructor.getInstructorForCourses().size(); i++) {
-//      ArrayList<Instructor> courseInstructorList = offeredList.get(instructor.getInstructorForCourses().get(i)).getInstructors();
+//      ArrayList<Instructor> courseInstructorList = offeredList.get(instructor.getInstructorForCourses().get(i)).getInstructorList();
 //      courseInstructorList.remove(instructor);
-//      offeredList.get(instructor.getInstructorForCourses().get(i)).setInstructors(courseInstructorList);
+//      offeredList.get(instructor.getInstructorForCourses().get(i)).setInstructorList(courseInstructorList);
+      
+      for(int j = 0; j < offeredList.size(); j++) {
+        
+        if(instructor.getInstructorForCourses().get(i).getCourseName() == offeredList.get(j).getCourseName()) {
+          ArrayList<Instructor> courseInstructorList = offeredList.get(j).getInstructorList();
+          courseInstructorList.remove(instructor);
+          offeredList.get(j).setInstructorList(courseInstructorList);
+        }
+        
+      }
+      
     }
     
     instructorList.remove(instructor);
@@ -172,7 +194,6 @@ public class Administrator {
     return true;
   }
   
-  //UNSURE
   public boolean removeStudentFromCourse(String studentID, String courseName) {
     ArrayList<Course> offeredList = school.getOfferedCourses();
     ArrayList<Student> studentList = school.getStudents();
@@ -194,9 +215,9 @@ public class Administrator {
     for(int i = 0; i < offeredList.size(); i++) {
       
       if(offeredList.get(i).getCourseName().equals(courseName)) {
-//        ArrayList<Student> courseStudentList = offeredList.get(i).getStudents();
-//        courseStudentList.remove(student);
-//        offeredList.get(i).setStudents(courseStudentList);
+        ArrayList<Student> courseStudentList = offeredList.get(i).getStudentList();
+        courseStudentList.remove(student);
+        offeredList.get(i).setStudentList(courseStudentList);
         
         ArrayList<Course> studentsCourses = student.getEnrolledCourses();
         studentsCourses.remove(offeredList.get(i));
@@ -211,7 +232,6 @@ public class Administrator {
     return false;
   }
   
-  //UNSURE
   public boolean removeInstructorFromCourse(String instructorID, String courseName) {
     ArrayList<Course> offeredList = school.getOfferedCourses();
     ArrayList<Instructor> instructorList = school.getInstructors();
@@ -233,9 +253,9 @@ public class Administrator {
     for(int i = 0; i < offeredList.size(); i++) {
       
       if(offeredList.get(i).getCourseName().equals(courseName)) {
-//        ArrayList<Instructor> courseInstructorList = offeredList.get(i).getInstructors();
-//        courseInstructorList.remove(instructor);
-//        offeredList.get(i).setInstructors(courseInstructorList);
+        ArrayList<Instructor> courseInstructorList = offeredList.get(i).getInstructorList();
+        courseInstructorList.remove(instructor);
+        offeredList.get(i).setInstructorList(courseInstructorList);
         
         ArrayList<Course> instructorsCourses = instructor.getInstructorForCourses();
         instructorsCourses.remove(offeredList.get(i));
@@ -248,6 +268,10 @@ public class Administrator {
     
     return false;
   }
+  
+  public void setIdPassword(String idPassword) {
+    this.idPassword = idPassword;
+  }
 
   public String getFullName() {
     return this.firstName + " " + this.lastName;
@@ -255,6 +279,10 @@ public class Administrator {
 
   public String getAdminID() {
     return this.adminID;
+  }
+  
+  public String getIdPassword() {
+    return idPassword;
   }
 
 }
