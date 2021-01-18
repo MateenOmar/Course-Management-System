@@ -34,6 +34,11 @@ public class Course {
         assignment.remove(i);
       }
     }
+    for(int i = 0; i < students.size(); i++) {
+      ArrayList<ArrayList<Float>> tempGrades = students.get(i).getGrades();
+      int indexOfCourse = students.get(i).getCourseIndex(courseName);
+      tempGrades.get(indexOfCourse).set(orderOfAssessments.indexOf(title), null);
+    }
   }
   
   public void printAllAssignmentsTitle() {
@@ -52,6 +57,11 @@ public class Course {
       if(this.quizzes.get(i).getTitle().equals(title)) {
         quizzes.remove(i);
       }
+    }
+    for(int i = 0; i < students.size(); i++) {
+      ArrayList<ArrayList<Float>> tempGrades = students.get(i).getGrades();
+      int indexOfCourse = students.get(i).getCourseIndex(courseName);
+      tempGrades.get(indexOfCourse).set(orderOfAssessments.indexOf(title), null);
     }
   }
   
@@ -92,7 +102,7 @@ public class Course {
     Student tempStudent = findStudentByID(studentID);
     ArrayList<ArrayList<Float>> tempGrades = tempStudent.getGrades();
     int indexOfCourse = tempStudent.getCourseIndex(courseName);
-    tempGrades.get(indexOfCourse).set(tempGrades.get(indexOfCourse).indexOf(title), grade);
+    tempGrades.get(indexOfCourse).set(orderOfAssessments.indexOf(title), grade);
   }
   
   
