@@ -1,8 +1,10 @@
 package CourseManagement;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Instructor {
+@SuppressWarnings("serial")
+public class Instructor implements Serializable{
   
   private ArrayList<Course> instructorForCourses;
   private String firstName;
@@ -15,6 +17,7 @@ public class Instructor {
     this.lastName = lastName;
     this.instructorID = lastName + firstName + num;
     this.instructorForCourses = new ArrayList<Course>();
+    this.idPassword = this.instructorID + firstName;
   }
 
   public ArrayList<Course> getInstructorForCourses() {

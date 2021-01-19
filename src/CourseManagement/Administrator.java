@@ -1,8 +1,10 @@
 package CourseManagement;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Administrator {
+@SuppressWarnings("serial")
+public class Administrator implements Serializable{
 
   private String firstName;
   private String lastName;
@@ -17,6 +19,7 @@ public class Administrator {
     this.firstName = firstName;
     this.lastName = lastName;
     this.adminID = lastName + firstName;
+    this.idPassword = this.adminID + firstName;
     numForStudents = 5555;
     numForInstructors = 1111;
   }

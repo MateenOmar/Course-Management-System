@@ -1,8 +1,10 @@
 package CourseManagement;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class School {
+@SuppressWarnings("serial")
+public class School implements Serializable{
   
   private ArrayList<Student> students;
   private ArrayList<Instructor> instructors;
