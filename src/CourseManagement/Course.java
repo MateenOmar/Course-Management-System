@@ -29,15 +29,19 @@ public class Course {
   }
   
   public void removeAssignment(String title) {
+    int indexAssessment = -1;
     for(int i = 0; i < assignment.size(); i++) {
       if(this.assignment.get(i).getTitle().equals(title)) {
         assignment.remove(i);
+        indexAssessment = i;
+        break;
       }
     }
     for(int i = 0; i < students.size(); i++) {
       ArrayList<ArrayList<Float>> tempGrades = students.get(i).getGrades();
       int indexOfCourse = students.get(i).getCourseIndex(courseName);
-      tempGrades.get(indexOfCourse).set(orderOfAssessments.indexOf(title), null);
+      tempGrades.get(indexOfCourse).remove(indexAssessment);
+      students.get(i).setGrades(tempGrades);
     }
   }
   
@@ -53,15 +57,19 @@ public class Course {
   }
   
   public void removeQuiz(String title) {
+    int indexAssessment = -1;
     for(int i = 0; i < quizzes.size(); i++) {
       if(this.quizzes.get(i).getTitle().equals(title)) {
         quizzes.remove(i);
+        indexAssessment = i;
+        break;
       }
     }
     for(int i = 0; i < students.size(); i++) {
       ArrayList<ArrayList<Float>> tempGrades = students.get(i).getGrades();
       int indexOfCourse = students.get(i).getCourseIndex(courseName);
-      tempGrades.get(indexOfCourse).set(orderOfAssessments.indexOf(title), null);
+      tempGrades.get(indexOfCourse).remove(indexAssessment);
+      students.get(i).setGrades(tempGrades);
     }
   }
   
@@ -103,7 +111,18 @@ public class Course {
     ArrayList<ArrayList<Float>> tempGrades = tempStudent.getGrades();
     int indexOfCourse = tempStudent.getCourseIndex(courseName);
     tempGrades.get(indexOfCourse).set(orderOfAssessments.indexOf(title), grade);
+    tempStudent.setGrades(tempGrades);
   }
   
+  public void addStudentGrades(String title) {
+    for(int i = 0; i < students.size(); i++) {
+      ArrayList<ArrayList<Float>> tempGrades = students.get(i).getGrades();
+      int indexOfCourse = students.get(i).getCourseIndex(courseName);
+      ArrayList<Float> temp = tempGrades.get(indexOfCourse);
+      temp.add(null);
+      tempGrades.set(indexOfCourse, temp);
+      students.get(i).setGrades(tempGrades);
+    }
+  }
   
 }
