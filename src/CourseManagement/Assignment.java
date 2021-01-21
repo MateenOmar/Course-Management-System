@@ -1,6 +1,9 @@
 package CourseManagement;
 
-public class Assignment {
+import java.io.Serializable;
+
+@SuppressWarnings("serial")
+public class Assignment implements Serializable{
 
   private String title;
   private String note;

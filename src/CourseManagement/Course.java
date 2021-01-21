@@ -1,9 +1,12 @@
 package CourseManagement;
+import java.io.Serializable;
 import java.util.*;
 
-public class Course {
+@SuppressWarnings("serial")
+public class Course implements Serializable{
   
   private String courseName;
+  private ArrayList<String> announcements;
   private ArrayList<Assignment> assignment;
   private ArrayList<Quiz> quizzes;
   private ArrayList<Student> students;
@@ -15,9 +18,11 @@ public class Course {
     quizzes = new ArrayList<Quiz>();
     students = new ArrayList<Student>();
     instructors = new ArrayList<Instructor>();
+    announcements = new ArrayList<String>();
+    orderOfAssessments = new ArrayList<String>();
     this.courseName = courseName;
   }
-  
+
   public String getCourseName() {
     return this.courseName;
   }
@@ -96,6 +101,14 @@ public class Course {
   
   public ArrayList<Instructor> getInstructorList(){
     return instructors;
+  }
+  
+  public ArrayList<String> getAnnouncements() {
+    return announcements;
+  }
+
+  public void setAnnouncements(ArrayList<String> announcements) {
+    this.announcements = announcements;
   }
   
   public void setInstructorList(ArrayList<Instructor> instructors) {
